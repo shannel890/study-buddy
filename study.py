@@ -1,10 +1,12 @@
 import google.genai as genai
 import os
 from google.genai import types
+from dotenv import load_dotenv
 
 # 1. Configure the Gemini API client
 # It's best practice to set the key as an environment variable
-os.environ["GEMINI_API_KEY"] = "AIzaSyBh5hPZUy8ylQypu7sZRwESPszhBBLDQfo"
+load_dotenv()
+API_KEY = os.getenv("GOOGLE_API_KEY")
 client = genai.Client()
 
 def summarize_notes(notes_text: str):

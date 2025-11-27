@@ -194,3 +194,56 @@ FileNotFoundError: Document 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5 not found locally; A
 2025-11-27 21:57:21,593 - INFO - google_api_tools - Successfully added slides for all flashcards.
 2025-11-27 21:57:21,593 - INFO - main - Presentation created: /home/shannel/Desktop/desktop projects/study_buddy/presentation_1764269841.json
 2025-11-27 21:57:21,593 - INFO - main - Study Buddy process complete. Check the log file for details.
+2025-11-27 22:36:41,858 - INFO - main - Study Buddy workflow initiated.
+2025-11-27 22:36:41,858 - INFO - auth - Starting authorization process.
+2025-11-27 22:36:42,023 - INFO - auth - Loaded credentials from token.json.
+2025-11-27 22:36:42,835 - INFO - auth - Refreshed expired credentials.
+2025-11-27 22:36:42,835 - INFO - main - Authorization completed.
+2025-11-27 22:36:42,835 - INFO - google_api_tools - Starting fetch for document ID: 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5
+2025-11-27 22:36:42,922 - INFO - google_api_tools - Attempting to fetch document via Google Docs API: 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5
+2025-11-27 22:36:44,413 - ERROR - google_api_tools - Google Docs API error for 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5: <HttpError 404 when requesting https://docs.googleapis.com/v1/documents/1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5?alt=json returned "Requested entity was not found.". Details: "Requested entity was not found.">
+Traceback (most recent call last):
+  File "/home/shannel/Desktop/desktop projects/study_buddy/google_api_tools.py", line 56, in get_document_text
+    doc = service.documents().get(documentId=document_id).execute()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shannel/Desktop/desktop projects/study_buddy/plan/lib/python3.12/site-packages/googleapiclient/_helpers.py", line 130, in positional_wrapper
+    return wrapped(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shannel/Desktop/desktop projects/study_buddy/plan/lib/python3.12/site-packages/googleapiclient/http.py", line 938, in execute
+    raise HttpError(resp, content, uri=self.uri)
+googleapiclient.errors.HttpError: <HttpError 404 when requesting https://docs.googleapis.com/v1/documents/1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5?alt=json returned "Requested entity was not found.". Details: "Requested entity was not found.">
+2025-11-27 22:36:44,414 - ERROR - google_api_tools - Document not found locally and Google Docs API not available/configured: 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5
+2025-11-27 22:36:44,414 - ERROR - google_api_tools - Failed fetching document 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5: Document 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5 not found locally; API integration required.
+Traceback (most recent call last):
+  File "/home/shannel/Desktop/desktop projects/study_buddy/google_api_tools.py", line 75, in get_document_text
+    raise FileNotFoundError(f"Document {document_id} not found locally; API integration required.")
+FileNotFoundError: Document 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5 not found locally; API integration required.
+2025-11-27 22:36:44,415 - ERROR - main - Document 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5 not found locally and API fetch failed.
+2025-11-27 22:36:44,415 - CRITICAL - main - Study Buddy script crashed: Document 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5 not found locally; API integration required.
+Traceback (most recent call last):
+  File "/home/shannel/Desktop/desktop projects/study_buddy/main.py", line 25, in main
+    text = get_document_text(doc_id, creds=creds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shannel/Desktop/desktop projects/study_buddy/google_api_tools.py", line 75, in get_document_text
+    raise FileNotFoundError(f"Document {document_id} not found locally; API integration required.")
+FileNotFoundError: Document 1K4z5Za_aXlBGrR3JvRfeTdA3Rqbeg5 not found locally; API integration required.
+2025-11-27 22:37:44,485 - INFO - main - Study Buddy workflow initiated.
+2025-11-27 22:37:44,486 - INFO - auth - Starting authorization process.
+2025-11-27 22:37:44,668 - INFO - auth - Loaded credentials from token.json.
+2025-11-27 22:37:45,599 - INFO - auth - Refreshed expired credentials.
+2025-11-27 22:37:45,600 - INFO - main - Authorization completed.
+2025-11-27 22:37:45,601 - INFO - google_api_tools - Starting fetch for document ID: 14B6ZhHmjy1BDGwh5eNOYNoK3q1QfeA54yynL1xnwXHs
+2025-11-27 22:37:45,728 - INFO - google_api_tools - Attempting to fetch document via Google Docs API: 14B6ZhHmjy1BDGwh5eNOYNoK3q1QfeA54yynL1xnwXHs
+2025-11-27 22:37:48,292 - INFO - google_api_tools - Text extraction complete (Docs API). Characters: 1974
+2025-11-27 22:37:48,293 - INFO - main - Notes successfully fetched from document: 14B6ZhHmjy1BDGwh5eNOYNoK3q1QfeA54yynL1xnwXHs
+2025-11-27 22:37:48,293 - INFO - gemini_processor - Sending text to Gemini for summarization (approx chars=1974).
+2025-11-27 22:37:48,293 - INFO - gemini_processor - Summary successfully generated. Characters: 339
+2025-11-27 22:37:48,293 - INFO - main - Notes summarization complete.
+2025-11-27 22:37:48,293 - INFO - gemini_processor - Requesting 10 flashcards from Gemini output generation.
+2025-11-27 22:37:48,294 - INFO - gemini_processor - Parsed 2 flashcards from JSON output.
+2025-11-27 22:37:48,294 - INFO - main - Generated 2 flashcards.
+2025-11-27 22:37:48,294 - INFO - google_api_tools - Beginning Slides creation for 2 flashcards.
+2025-11-27 22:37:48,294 - INFO - google_api_tools - Created presentation: id=1764272268 url=/home/shannel/Desktop/desktop projects/study_buddy/presentation_1764272268.json
+2025-11-27 22:37:48,295 - INFO - google_api_tools - Successfully added slides for all flashcards.
+2025-11-27 22:37:48,295 - INFO - main - Presentation created: /home/shannel/Desktop/desktop projects/study_buddy/presentation_1764272268.json
+2025-11-27 22:37:48,295 - INFO - main - Study Buddy process complete. Check the log file for details.
