@@ -1,4 +1,7 @@
+__pycache__/
+*.pyc
+*.log
+presentation_*.json
+token.json
 .env
 client_secrets.json
-token.json
-plan
