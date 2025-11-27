@@ -26,7 +26,8 @@ def main(doc_id: str | None = None):
                 logger.info("Notes successfully fetched from document: %s", doc_id)
             except FileNotFoundError:
                 logger.error("Document %s not found locally and API fetch failed.", doc_id)
-                raise
+                print(f"Error: The file '{doc_id}' was not found.")
+                sys.exit(1)
             except Exception:
                 logger.error("Unable to fetch notes for document_id=%s; aborting document step.", doc_id)
                 raise
@@ -50,6 +51,7 @@ def main(doc_id: str | None = None):
         # Create a simple presentation locally
         presentation = create_flashcard_deck(flashcards)
         logger.info("Presentation created: %s", presentation.get("url"))
+        print(f"Presentation created: {presentation.get('url')}")
 
         logger.info("Study Buddy process complete. Check the log file for details.")
         return presentation
