@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy Report</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Study Buddy Report</h1>
+        <div id="summary">
+            <h2>Document Summary</h2>
+            <p><strong>Document Title:</strong> {{document_title}}</p>
+            <p><strong>Overview:</strong></p>
+            <p>{{overview}}</p>
+            <h3>Key Highlights</h3>
+            <ul>
+                {% for highlight in key_highlights %}
+                <li>{{highlight}}</li>
+                {% endfor %}
+            </ul>
+            <h3>Important Terms</h3>
+            <ul>
+                {% for term in important_terms %}
+                <li>{{term}}</li>
+                {% endfor %}
+            </ul>
+            <h3>Action Items</h3>
+            <ul>
+                {% for item in action_items %}
+                <li>{{item}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="flashcards.html" class="btn">View Flashcards</a>
+    </div>
+</body>
+</html>
