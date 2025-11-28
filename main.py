@@ -1,4 +1,7 @@
 import sys
+import os
+import shutil
+from jinja2 import Environment, FileSystemLoader
 from log_config import setup_logger
 
 from auth import authorize
@@ -119,12 +122,49 @@ def main(doc_id: str | None = None):
         presentation = create_flashcard_deck(final_flashcards)
         logger.info("Presentation created: %s", presentation.get("url"))
 
+        logger.info("Generating HTML report...")
+        generate_html_report(doc_summary, final_flashcards)
+
         logger.info("Study Buddy process complete. Check the log file for details.")
         return presentation
 
     except Exception as e:
         logger.critical("Study Buddy script crashed: %s", e, exc_info=True)
         raise
+
+
+def generate_html_report(summary, flashcards):
+    """Generates an HTML report from the summary and flashcards."""
+    # Create output directory if it doesn't exist
+    output_dir = "report"
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    # Set up Jinja2 environment
+    env = Environment(loader=FileSystemLoader("templates"))
+
+    # Render index page
+    index_template = env.get_template("index.html")
+    index_html = index_template.render(
+        document_title=summary["document_title"],
+        overview=summary["overview"],
+        key_highlights=summary["key_highlights"],
+        important_terms=summary["important_terms"],
+        action_items=summary["action_items"],
+    )
+
+    # Render flashcards page
+    flashcards_template = env.get_template("flashcards.html")
+    flashcards_html = flashcards_template.render(flashcards=flashcards)
+
+    # Save HTML files
+    with open(os.path.join(output_dir, "index.html"), "w") as f:
+        f.write(index_html)
+    with open(os.path.join(output_dir, "flashcards.html"), "w") as f:
+        f.write(flashcards_html)
+
+    # Copy styles.css
+    shutil.copy("templates/styles.css", os.path.join(output_dir, "styles.css"))
 
 
 if __name__ == "__main__":
