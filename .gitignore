@@ -1,8 +1,11 @@
 __pycache__/
 *.pyc
 *.log
+report/
 presentation_*.json
 token.json
 .env
 client_secrets.json
 plan
+*.json
+*.md
